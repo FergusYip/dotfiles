@@ -1,0 +1,134 @@
+# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.config/zsh/.zshrc.
+# Initialization code that may require console input (password prompts, [y/n]
+# confirmations, etc.) must go above this block; everything else may go below.
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
+
+# User configuration
+
+# Always work in a tmux session if tmux is installed
+# https://github.com/chrishunt/dot-files/blob/master/.zshrc
+# if which tmux 2>&1 >/dev/null; then
+#  if [ $TERM != "screen-256color" ] && [  $TERM != "screen" ]; then
+#    tmux attach -t hack || tmux new -s hack; exit
+#  fi
+# fi
+
+# export MANPATH="/usr/local/man:$MANPATH"
+
+# You may need to manually set your language environment
+# export LANG=en_US.UTF-8
+
+# Preferred editor for local and remote sessions
+# if [[ -n $SSH_CONNECTION ]]; then
+#   export EDITOR='vim'
+# else
+#   export EDITOR='mvim'
+# fi
+
+# ZSH History
+HISTFILE=~/.config/zsh/.zsh_history
+HISTSIZE=1002
+SAVEHIST=1000
+
+# Colored Man pages
+export MANPAGER="less -R --use-color -Dd+r -Du+b"
+
+export PATH="/usr/local/sbin:$PATH"
+
+# Basic auto/tab complete:
+autoload -U compinit
+zstyle ':completion:*' menu select
+zmodload zsh/complist
+compinit
+_comp_options+=(globdots) # Include hidden files.
+
+# vi mode
+bindkey -v
+export KEYTIMEOUT=25
+
+# Use vim keys in tab complete menu:
+bindkey -M menuselect 'h' vi-backward-char
+bindkey -M menuselect 'k' vi-up-line-or-history
+bindkey -M menuselect 'l' vi-forward-char
+bindkey -M menuselect 'j' vi-down-line-or-history
+bindkey -v '^?' backward-delete-char
+
+# Change cursor shape for different vi modes.
+function zle-keymap-select {
+  if [[ ${KEYMAP} == vicmd ]] ||
+    [[ $1 = 'block' ]]; then
+    echo -ne '\e[1 q'
+  elif [[ ${KEYMAP} == main ]] ||
+    [[ ${KEYMAP} == viins ]] ||
+    [[ ${KEYMAP} = '' ]] ||
+    [[ $1 = 'beam' ]]; then
+    echo -ne '\e[5 q'
+  fi
+}
+zle -N zle-keymap-select
+zle-line-init() {
+  zle -K viins # initiate `vi insert` as keymap (can be removed if `bindkey -V` has been set elsewhere)
+  echo -ne "\e[5 q"
+}
+zle -N zle-line-init
+echo -ne '\e[5 q'                # Use beam shape cursor on startup.
+preexec() { echo -ne '\e[5 q'; } # Use beam shape cursor for each new prompt.
+
+export PATH=/Library/PostgreSQL/12/bin:$PATH
+export PGDATA="/Library/PostgreSQL/12/data"
+
+export PATH=~/Library/flutter/bin:$PATH
+export ANDROID_HOME=$HOME/Library/Android/sdk
+export PATH=$PATH:$ANDROID_HOME/emulator
+export PATH=$PATH:$ANDROID_HOME/tools
+export PATH=$PATH:$ANDROID_HOME/tools/bin
+export PATH=$PATH:$ANDROID_HOME/platform-tools
+
+export PATH="$PATH:$HOME/.local/bin"
+export PATH="$PATH:/usr/local/opt/arm-gcc-bin@8/bin"
+export PATH=$PATH:/usr/local/go/bin
+export PATH=$PATH:$HOME/go/bin
+export PATH=$PATH:$HOME/.cargo/bin
+
+[ -f "/Users/fergus/.ghcup/env" ] && source "/Users/fergus/.ghcup/env" # ghcup-env
+
+# asdf runtime version manager
+export ASDF_CONFIG_FILE=/Users/fergus/.config/asdf/.asdfrc
+[ -f "$HOME/.asdf/asdf.sh" ] && source $HOME/.asdf/asdf.sh # git install
+[ -f "/usr/local/opt/asdf/asdf.sh" ] && source /usr/local/opt/asdf/asdf.sh # pacman install
+
+export EDITOR="nvim"
+alias vim='nvim'
+alias vi='nvim'
+
+export AWS_PROFILE=default
+
+source ~/.config/aliases
+source ~/.config/zsh/powerlevel10k/powerlevel10k.zsh-theme
+
+# Local config
+[ -f "$HOME/.config/$HOSTNAME.local.sh" ] && source "$HOME/.config/$HOSTNAME.local.sh"
+cat "$HOME/.config/$HOSTNAME.local.sh"
+
+# To customize prompt, run `p10k configure` or edit ~/.config/zsh/.p10k.zsh.
+[[ ! -f ~/.config/zsh/.p10k.zsh ]] || source ~/.config/zsh/.p10k.zsh
+
+source "$ZDOTDIR/colored-man-pages.plugin.zsh"
+source "$ZDOTDIR/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
+source "$ZDOTDIR/zsh-autosuggestions/zsh-autosuggestions.zsh"
+source "$ZDOTDIR/git.zsh"
+
+LFCD=~/.config/lf/lfcd.sh
+if [ -f "$LFCD" ]; then
+    source "$LFCD"
+fi
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+eval "$(_TMUXP_COMPLETE=source_zsh tmuxp)"
+
+
+
+

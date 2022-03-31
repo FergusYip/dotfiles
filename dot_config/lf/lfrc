@@ -1,0 +1,14 @@
+
+cmd trash $IFS="`printf '\n\t'`"; trash $fx
+
+map D trash
+map i $less "$f"
+map O $open "$f"
+map M push $mkdir<space>
+map T push $touch<space>
+map E push $$EDITOR<space>
+
+cmd on-cd &{{
+    pwd
+}}
+
