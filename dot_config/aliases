@@ -1,0 +1,16 @@
+alias ls='exa'
+alias ll='ls -alh'
+alias la='ls -a'
+
+alias v="lvim"
+alias vim="lvim"
+
+alias code="codium"
+
+alias open-deep="xcrun simctl openurl booted"
+
+alias y="yarn"
+alias yw="yarn workspace"
+alias 'ypad'="yarn ios --simulator 'iPad Pro (11-inch) (3rd generation)'"
+
+
