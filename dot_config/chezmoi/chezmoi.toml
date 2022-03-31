@@ -4,3 +4,6 @@ exclude = ["externals"]
 [git]
 autoCommit = true
 autoPush = true
+
+[gpg]
+recipient = "contact@fergusyip.me"
