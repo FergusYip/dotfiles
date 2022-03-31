@@ -108,10 +108,6 @@ export AWS_PROFILE=default
 source ~/.config/aliases
 source ~/.config/zsh/powerlevel10k/powerlevel10k.zsh-theme
 
-# Local config
-[ -f "$HOME/.config/$HOSTNAME.local.sh" ] && source "$HOME/.config/$HOSTNAME.local.sh"
-cat "$HOME/.config/$HOSTNAME.local.sh"
-
 # To customize prompt, run `p10k configure` or edit ~/.config/zsh/.p10k.zsh.
 [[ ! -f ~/.config/zsh/.p10k.zsh ]] || source ~/.config/zsh/.p10k.zsh
 
@@ -124,9 +120,4 @@ if [ -f "$LFCD" ]; then
 fi
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-
-eval "$(_TMUXP_COMPLETE=source_zsh tmuxp)"
-
-
-
 
