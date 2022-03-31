@@ -1,5 +1,5 @@
-[diff]
-exclude = ["externals"]
+# [diff]
+# exclude = ["externals"]
 
 [git]
 autoCommit = true
