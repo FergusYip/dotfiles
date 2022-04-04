@@ -183,6 +183,7 @@ lvim.plugins = {
 	{ "lukas-reineke/indent-blankline.nvim" },
 	{ "p00f/nvim-ts-rainbow" },
 	{ "norcalli/nvim-colorizer.lua" },
+	{ "tpope/vim-fugitive" },
 	--     {"folke/tokyonight.nvim"},
 	--     {
 	--       "folke/trouble.nvim",
@@ -194,5 +195,3 @@ require("colorizer").setup()
 
 -- Autocommands (https://neovim.io/doc/user/autocmd.html)
 -- lvim.autocommands.custom_groups = {
---   { "BufWinEnter", "*.lua", "setlocal ts=8 sw=8" },
--- }
