@@ -1,16 +1,31 @@
-alias ls='exa'
+exists () {
+    type "$1" >/dev/null 2>/dev/null
+}
+
+alias_if_exists () {
+    name="$1"
+    shift 1;
+    for i in "$@"; do
+	if exists "$i"; then
+            alias "$name"="$i"
+            return 0
+	fi
+    done
+    return 1
+}
+
+alias_if_exists ls exa
 alias ll='ls -alh'
 alias la='ls -a'
 
-alias v="lvim"
-alias vim="lvim"
+alias_if_exists v lvim nvim vim vi
+alias_if_exists vim lvim nvim vi
 
-alias code="codium"
-
+alias_if_exists code codium
+s
 alias open-deep="xcrun simctl openurl booted"
 
 alias y="yarn"
 alias yw="yarn workspace"
 alias 'ypad'="yarn ios --simulator 'iPad Pro (11-inch) (3rd generation)'"
-
 
