@@ -22,7 +22,7 @@ alias_if_exists v lvim nvim vim vi
 alias_if_exists vim lvim nvim vi
 
 alias_if_exists code codium
-s
+
 alias open-deep="xcrun simctl openurl booted"
 
 alias y="yarn"
