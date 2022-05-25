@@ -29,3 +29,12 @@ alias y="yarn"
 alias yw="yarn workspace"
 alias 'ypad'="yarn ios --simulator 'iPad Pro (11-inch) (3rd generation)'"
 
+alias boo="yarn node `which boo`"
+
+gch () {
+    branch="$(git branch -a | sed 's/..//' | fzf)"
+    if [ ! -z "$branch" ]; then
+        git checkout "$branch"
+    fi
+}
+
