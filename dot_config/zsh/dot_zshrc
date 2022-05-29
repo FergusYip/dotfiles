@@ -115,6 +115,9 @@ source "$ZDOTDIR/powerlevel10k/powerlevel10k.zsh-theme"
 source "$ZDOTDIR/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
 source "$ZDOTDIR/zsh-autosuggestions/zsh-autosuggestions.zsh"
 
+
+[[ ! -f $ZDOTDIR/goto.sh ]] || source $ZDOTDIR/goto.sh
+
 LFCD=~/.config/lf/lfcd.sh
 if [ -f "$LFCD" ]; then
     source "$LFCD"
