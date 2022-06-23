@@ -32,10 +32,18 @@ alias 'ypad'="yarn ios --simulator 'iPad Pro (11-inch) (3rd generation)'"
 alias boo="yarn node `which boo`"
 
 gch () {
-    query="$1"
-    branch="$(git branch -a | sed 's/..//' | fzf -q "$query")"
-    if [ ! -z "$branch" ]; then
-        git checkout "$branch"
+    query="$@"
+    branches=$(git branch -a)
+    if [ -n "$branches" ]; then
+        branch="$(echo "$branches" | sed 's/..//' | fzf -q "$query")"
+        if [ ! -z "$branch" ]; then
+            git checkout "$branch"
+        fi
     fi
+    
 }
+
+gs="git status"
+gc="git checkout"
+gcb="git checkout -b"
 
