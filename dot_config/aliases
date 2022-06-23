@@ -43,7 +43,7 @@ gch () {
     
 }
 
-gs="git status"
-gc="git checkout"
-gcb="git checkout -b"
+alias gs="git status"
+alias gc="git checkout"
+alias gcb="git checkout -b"
 
