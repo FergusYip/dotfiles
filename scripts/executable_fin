@@ -1,0 +1,15 @@
+#!/bin/sh
+
+# assert within git worktree
+git rev-parse --is-inside-work-tree >/dev/null || exit 1
+
+path_to_fin='tools/fin/run.js'
+full_fin_path=$(git rev-parse --show-toplevel)/$path_to_fin
+
+if [ -f $full_fin_path ]; then
+    $full_fin_path
+else
+    echo "error: fin could not be found at $full_fin_path" >&2
+    exit 1
+fi
+
