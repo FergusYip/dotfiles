@@ -63,6 +63,28 @@
           ]
         }
       ]
+    },
+    {
+      "description": "Open Google Chrome using Left Option + b",
+      "manipulators": [
+        {
+          "type": "basic",
+          "from": {
+            "key_code": "b",
+            "modifiers": {
+              "mandatory": [
+                "left_option"
+              ]
+            }
+          },
+          "to": [
+            {
+              "shell_command": "open -a 'Google Chrome'"
+            }
+          ]
+        }
+      ]
     }
+
   ]
 }
