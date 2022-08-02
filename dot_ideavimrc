@@ -1,8 +1,10 @@
 "" Source your .vimrc
 "source ~/.vimrc
 
-:set ignorecase
-:set smartcase
+set ignorecase
+set smartcase
+set showmatch
+set hlsearch
 
 let mapleader = " "
 
@@ -15,7 +17,7 @@ set scrolloff=5
 set incsearch
 
 " Don't use Ex mode, use Q for formatting.
-map Q gq
+" map Q gq
 
 "" -- Map IDE actions to IdeaVim -- https://jb.gg/abva4t
 "" Map \r to the Reformat Code action
