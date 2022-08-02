@@ -2,15 +2,15 @@
   "title": "Launch applications",
   "rules": [
     {
-      "description": "Open Alacritty using Left Option + Enter",
+      "description": "Open Alacritty using Right Command + t",
       "manipulators": [
         {
           "type": "basic",
           "from": {
-            "key_code": "return_or_enter",
+            "key_code": "t",
             "modifiers": {
               "mandatory": [
-                "left_option"
+                "right_command"
               ]
             }
           },
@@ -65,7 +65,7 @@
       ]
     },
     {
-      "description": "Open Google Chrome using Left Option + b",
+      "description": "Open Google Chrome using Right Command + b",
       "manipulators": [
         {
           "type": "basic",
@@ -73,7 +73,7 @@
             "key_code": "b",
             "modifiers": {
               "mandatory": [
-                "left_option"
+                "right_command"
               ]
             }
           },
