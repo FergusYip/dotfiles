@@ -1,6 +1,9 @@
 "" Source your .vimrc
 "source ~/.vimrc
 
+nnoremap \e :e ~/.ideavimrc<CR>
+nnoremap \r :action IdeaVim.ReloadVimRc.reload<CR>
+
 set ignorecase
 set smartcase
 set showmatch
@@ -29,6 +32,9 @@ map <S-l> <action>(NextTab)
 
 map <C-h> <action>(PrevSplitter)
 map <C-l> <action>(NextSplitter)
+
+vnoremap < <gv
+vnoremap > >gv
 
 "" Map <leader>d to start debug
 "map <leader>d <Action>(Debug)
