@@ -92,6 +92,7 @@ export PATH=$PATH:/usr/local/go/bin
 export PATH=$PATH:$HOME/go/bin
 export PATH=$PATH:$HOME/.cargo/bin
 export PATH=$PATH:$HOME/scripts
+export PATH=$PATH:"$HOME/Library/Application Support/JetBrains/Toolbox/scripts"
 
 [ -f "$HOME/.ghcup/env" ] && source "$HOME/.ghcup/env" # ghcup-env
 
@@ -100,12 +101,16 @@ export ASDF_CONFIG_FILE=$HOME/.config/asdf/.asdfrc
 [ -f "$HOME/.asdf/asdf.sh" ] && source $HOME/.asdf/asdf.sh # git install
 [ -f "/usr/local/opt/asdf/asdf.sh" ] && source /usr/local/opt/asdf/asdf.sh # pacman install
 
+# https://github.com/ajeetdsouza/zoxide
+eval "$(zoxide init zsh)"
+
 export EDITOR="nvim"
 alias vim='nvim'
 alias vi='nvim'
 
 export AWS_PROFILE=default
 
+[ -f ~/.config/credentials ] && source ~/.config/credentials
 [ -f ~/.config/private_aliases ] && source ~/.config/private_aliases
 source ~/.config/aliases
 source "$ZDOTDIR/powerlevel10k/powerlevel10k.zsh-theme"
