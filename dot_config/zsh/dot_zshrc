@@ -112,7 +112,8 @@ export AWS_PROFILE=default
 
 [ -f ~/.config/credentials ] && source ~/.config/credentials
 [ -f ~/.config/private_aliases ] && source ~/.config/private_aliases
-source ~/.config/aliases
+source ~/.config/aliases/main.sh
+
 source "$ZDOTDIR/powerlevel10k/powerlevel10k.zsh-theme"
 
 # To customize prompt, run `p10k configure` or edit $ZDOTDIR/.p10k.zsh.
