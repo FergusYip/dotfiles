@@ -29,8 +29,6 @@ alias y="yarn"
 alias yw="yarn workspace"
 alias 'ypad'="yarn ios --simulator 'iPad Pro (11-inch) (3rd generation)'"
 
-alias boo="yarn node `which boo`"
-
 gch () {
     query="$@"
     branches=$(git branch -a)
@@ -46,4 +44,6 @@ gch () {
 alias gs="git status"
 alias gc="git checkout"
 alias gcb="git checkout -b"
+
+[ -f ~/.config/aliases/canva.sh ] && source ~/.config/aliases/canva.sh
 
