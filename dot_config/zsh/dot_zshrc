@@ -4,17 +4,7 @@
 if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
-
-# User configuration
-
-# Always work in a tmux session if tmux is installed
-# https://github.com/chrishunt/dot-files/blob/master/.zshrc
-# if which tmux 2>&1 >/dev/null; then
-#  if [ $TERM != "screen-256color" ] && [  $TERM != "screen" ]; then
-#    tmux attach -t hack || tmux new -s hack; exit
-#  fi
-# fi
-
+#
 # export MANPATH="/usr/local/man:$MANPATH"
 
 # You may need to manually set your language environment
@@ -94,25 +84,19 @@ export PATH=$PATH:$HOME/.cargo/bin
 export PATH=$PATH:$HOME/scripts
 export PATH=$PATH:"$HOME/Library/Application Support/JetBrains/Toolbox/scripts"
 
-[ -f "$HOME/.ghcup/env" ] && source "$HOME/.ghcup/env" # ghcup-env
+export AWS_PROFILE=default
 
-# asdf runtime version manager
-export ASDF_CONFIG_FILE=$HOME/.config/asdf/.asdfrc
-[ -f "$HOME/.asdf/asdf.sh" ] && source $HOME/.asdf/asdf.sh # git install
-[ -f "/usr/local/opt/asdf/asdf.sh" ] && source /usr/local/opt/asdf/asdf.sh # pacman install
 
 # https://github.com/ajeetdsouza/zoxide
 eval "$(zoxide init zsh)"
+
+eval "$(direnv hook $SHELL)"
 
 export EDITOR="nvim"
 alias vim='nvim'
 alias vi='nvim'
 
-export AWS_PROFILE=default
 
-[ -f ~/.config/credentials ] && source ~/.config/credentials
-[ -f ~/.config/private_aliases ] && source ~/.config/private_aliases
-source ~/.config/aliases/main.sh
 
 source "$ZDOTDIR/powerlevel10k/powerlevel10k.zsh-theme"
 
@@ -130,7 +114,18 @@ if [ -f "$LFCD" ]; then
     source "$LFCD"
 fi
 
+
+[ -f "$HOME/.ghcup/env" ] && source "$HOME/.ghcup/env" # ghcup-env
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
-eval "$(direnv hook $SHELL)"
+# asdf runtime version manager
+export ASDF_CONFIG_FILE=$HOME/.config/asdf/.asdfrc
+[ -f "$HOME/.asdf/asdf.sh" ] && source $HOME/.asdf/asdf.sh # git install
+[ -f "/usr/local/opt/asdf/asdf.sh" ] && source /usr/local/opt/asdf/asdf.sh # pacman install
+
+
+[ -f ~/.config/credentials ] && source ~/.config/credentials
+[ -f ~/.config/private_aliases ] && source ~/.config/private_aliases
+source ~/.config/aliases/main.sh
+
 
