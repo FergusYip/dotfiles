@@ -27,11 +27,11 @@ set incsearch
 "map \r <Action>(ReformatCode)
 nmap <leader>e <action>(GotoNextError)
 
-map <S-h> <action>(PreviousTab)
-map <S-l> <action>(NextTab)
+nmap <S-h> <action>(PreviousTab)
+nmap <S-l> <action>(NextTab)
 
-map <C-h> <action>(PrevSplitter)
-map <C-l> <action>(NextSplitter)
+nmap <C-h> <action>(PrevSplitter)
+nmap <C-l> <action>(NextSplitter)
 
 vnoremap < <gv
 vnoremap > >gv
