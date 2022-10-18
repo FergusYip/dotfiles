@@ -42,7 +42,7 @@ gch () {
 }
 
 
-git_branch_parent () {
+git_parent () {
     branch=`git rev-parse --abbrev-ref HEAD`
     git show-branch -a 2>/dev/null | grep '\*' | grep -v "$branch" | head -n1 | sed 's/.*\[\(.*\)\].*/\1/' | sed 's/[\^~].*//'
 }
@@ -50,6 +50,7 @@ git_branch_parent () {
 alias gs="git status"
 alias gc="git checkout"
 alias gcb="git checkout -b"
+alias gcd="git checkout -d"
 
 [ -f ~/.config/aliases/canva.sh ] && source ~/.config/aliases/canva.sh
 
