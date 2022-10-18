@@ -18,9 +18,22 @@ fi
 # fi
 
 # ZSH History
-HISTFILE=~/.config/zsh/.zsh_history
 HISTSIZE=1002
 SAVEHIST=1000
+
+# How many lines of history to keep in memory
+HISTSIZE=5000               
+# Where to save history to disk
+HISTFILE=$ZDOTDIR/.zsh_history
+# Number of history entries to save to disk
+SAVEHIST=5000
+# Erase duplicates in the history file
+# HISTDUP=erase               
+
+# setopt appendhistory    # Append history to the history file (no overwriting)
+setopt SHARE_HISTORY      # Share history across terminals
+setopt HIST_IGNORE_DUPS
+setopt INC_APPEND_HISTORY  # Immediately append to the history file, not just when a term is killed
 
 # Colored Man pages
 export MANPAGER="less -R --use-color -Dd+r -Du+b"
