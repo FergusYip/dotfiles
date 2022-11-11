@@ -1,3 +1,31 @@
 [user]
-	email = contact@fergusyip.me
+	email = fergus@canva.com
 	name = Fergus Yip
+[filter "lfs"]
+	process = git-lfs filter-process
+	required = true
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+[protocol]
+	version = 2
+[maintenance]
+	repo = /Users/fergus/work/canva
+[alias]
+	where = branch --show-current
+	suno = status -uno
+	yeet = push -u origin HEAD
+	s = status
+	c = checkout
+    pull-green = fetch origin green:green
+    pull-master = fetch origin master:master
+    show-files = show --name-only
+    diff-files = diff --name-only
+[trace2]
+	eventTarget = af_unix:dgram:/Users/fergus/.cache/canva_olly_trace/05688aec8dd410d1/trace2.sock
+[fetch]
+	prune = true
+[push]
+	autoSetupRemote = true
+[diff]
+	algorithm = histogram
+
