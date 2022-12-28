@@ -21,14 +21,16 @@ p2 = subprocess.run(shlex.split("gh pr list -A '@me' --json 'number,baseRefName,
 open_prs = json.loads(p2.stdout)
 
 branch_pr_map = {pr['headRefName']: pr for pr in open_prs}
-
-pr_train = [branch_pr_map.get(branch) for branch in stack_branches if branch_pr_map.get(branch)]
-
 branches_with_pr = [branch for branch in stack_branches if branch_pr_map.get(branch)]
 
-pr_train_numbers = [branch_pr_map[branch]['number'] for branch in branches_with_pr]
-
 for i, branch in enumerate(branches_with_pr):
+
+    pr_train_p = subprocess.run(
+        ['git', 'branchless', 'query', '-b', f'stack() & (ancestors({branch}) + descendants({branch}))'],
+        capture_output=True, text=True)
+    pr_train = pr_train_p.stdout.strip().split('\n')
+
+    pr_train_numbers = [branch_pr_map[branch]['number'] for branch in pr_train if branch_pr_map.get(branch)]
 
     pr = branch_pr_map[branch]
 
@@ -40,7 +42,7 @@ for i, branch in enumerate(branches_with_pr):
     base_branch_p = subprocess.run(['git', 'branchless', 'query', '-b', f"ancestors({branch}) - {branch} - green"],
                                    capture_output=True, text=True)
     base_branch = base_branch_p.stdout.strip().split('\n')[-1]
-    
+
     # result = re.search(r"<pr-train-toc>(.+)</pr-train-toc", pr['body'])
     result = re.search(r"<pr-train-toc>(.*)</pr-train-toc>", pr['body'], re.S)
 
@@ -49,6 +51,10 @@ for i, branch in enumerate(branches_with_pr):
         body = body.replace(result.group(1), f'\n\n{pr_train_list}\n\n')
     else:
         body = f'{body}\n\n## PR Train\n\n<pr-train-toc>\n\n{pr_train_list}\n\n</pr-train-toc>\n'
+
+    if body == pr['body'] and base_branch == pr['baseRefName']:
+        print(f'Skipped {Colors.GREEN}{branch}{Colors.NONE}')
+        continue
 
     edit_command = ['gh', 'pr', 'edit', branch, '-B', base_branch, '-b', body]
     p3 = subprocess.run(edit_command, capture_output=True, text=True)
