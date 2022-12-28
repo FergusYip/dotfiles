@@ -37,8 +37,10 @@ for i, branch in enumerate(branches_with_pr):
 
     pr_train_markdown = f''
 
-    base_branch = branches_with_pr[i - 1] if i else 'master'
-
+    base_branch_p = subprocess.run(['git', 'branchless', 'query', '-b', f"ancestors({branch}) - {branch} - green"],
+                                   capture_output=True, text=True)
+    base_branch = base_branch_p.stdout.strip().split('\n')[-1]
+    
     # result = re.search(r"<pr-train-toc>(.+)</pr-train-toc", pr['body'])
     result = re.search(r"<pr-train-toc>(.*)</pr-train-toc>", pr['body'], re.S)
 
