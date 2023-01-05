@@ -12,14 +12,23 @@
 	repo = /Users/fergus/work/canva
 [alias]
 	where = branch --show-current
-	suno = status -uno
 	yeet = push -u origin HEAD
+
 	s = status
+	suno = status -uno
 	c = checkout
-    pull-green = fetch origin green:green
-    pull-master = fetch origin master:master
     show-files = show --name-only
     diff-files = diff --name-only
+
+    pull-green = fetch origin green:green
+    pull-master = fetch origin master:master
+
+    delta = ! git diff | delta
+
+    sls = sl 'stack() | branches() | heads(draft())'
+    hiderD = hide -r -D
+    stack = sl 'stack()'
+
 [trace2]
 	eventTarget = af_unix:dgram:/Users/fergus/.cache/canva_olly_trace/05688aec8dd410d1/trace2.sock
 [fetch]
@@ -28,4 +37,10 @@
 	autoSetupRemote = true
 [diff]
 	algorithm = histogram
+[pull]
+	rebase = true
+[delta]
+    side-by-side = true
 
+[init]
+	defaultBranch = main

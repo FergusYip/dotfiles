@@ -9,6 +9,8 @@ set smartcase
 set showmatch
 set hlsearch
 
+set number relativenumber
+
 let mapleader = " "
 
 "" -- Suggested options --
@@ -36,6 +38,9 @@ nmap <C-l> <action>(NextSplitter)
 vnoremap < <gv
 vnoremap > >gv
 
+nnoremap <C-d> <C-d>zz
+nnoremap <C-u> <C-u>zz
+
 "" Map <leader>d to start debug
 "map <leader>d <Action>(Debug)
 
@@ -44,3 +49,8 @@ vnoremap > >gv
 
 
 " Find more examples here: https://jb.gg/share-ideavimrc
+
+Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-surround'
+
+
