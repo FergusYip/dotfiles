@@ -53,7 +53,10 @@ for i, branch in enumerate(branches_with_pr):
         else:
             body = body.replace(result.group(1), '')
     else:
-        body = f'{body}\n\n<pr-train-toc>\n\n## PR Train\n\n{pr_train_list}\n\n</pr-train-toc>\n'
+        if pr_train_numbers:
+            body = f'{body}\n\n<pr-train-toc>\n\n## PR Train\n\n{pr_train_list}\n\n</pr-train-toc>\n'
+        else:
+            body = f'{body}\n\n<pr-train-toc>\n</pr-train-toc>\n'
 
     if body == pr['body'] and base_branch == pr['baseRefName']:
         print(f'Skipped {Colors.GREEN}{branch}{Colors.NONE}')
