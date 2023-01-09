@@ -28,6 +28,7 @@
     sls = sl 'stack() | branches() | heads(draft())'
     hiderD = hide -r -D
     stack = sl 'stack()'
+    sk = sl 'stack()'
 
 [trace2]
 	eventTarget = af_unix:dgram:/Users/fergus/.cache/canva_olly_trace/05688aec8dd410d1/trace2.sock
