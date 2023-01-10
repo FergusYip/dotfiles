@@ -44,19 +44,18 @@ for i, branch in enumerate(branches_with_pr):
                                    capture_output=True, text=True)
     base_branch = base_branch_p.stdout.strip().split('\n')[-1]
 
-    result = re.search(r"<pr-train-toc>(.*)</pr-train-toc>", pr['body'], re.S)
+    pattern = r"<pr-train-toc>(.*)</pr-train-toc>"
+    result = re.search(pattern, pr['body'], re.S)
 
     body = pr['body']
-    if result:
+    if result :
         if pr_train_numbers:
-            body = body.replace(result.group(1), f'\n\n## PR Train\n\n{pr_train_list}\n\n')
+            body = re.sub(pattern, f'<pr-train-toc>\n\n## PR Train\n\n{pr_train_list}\n\n</pr-train-toc>', body)
         else:
-            body = body.replace(result.group(1), '')
+            body = re.sub(pattern, f'<pr-train-toc></pr-train-toc>', body)
     else:
         if pr_train_numbers:
             body = f'{body}\n\n<pr-train-toc>\n\n## PR Train\n\n{pr_train_list}\n\n</pr-train-toc>\n'
-        else:
-            body = f'{body}\n\n<pr-train-toc>\n</pr-train-toc>\n'
 
     if body == pr['body'] and base_branch == pr['baseRefName']:
         print(f'Skipped {Colors.GREEN}{branch}{Colors.NONE}')
@@ -67,4 +66,5 @@ for i, branch in enumerate(branches_with_pr):
     if p3.returncode:
         print(p3.stderr, file=sys.stderr)
         exit(1)
+
     print(f'Updated {Colors.GREEN}{branch}{Colors.NONE}')
