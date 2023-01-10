@@ -6,6 +6,8 @@ import json
 import re
 import sys
 
+PR_TRAIN_CONTENTS_PATTERN = r"<pr-train-toc>(.*)</pr-train-toc>"
+
 
 class Colors:
     GREEN = "\033[92m"
@@ -69,16 +71,40 @@ def edit_github_pr(branch, base_branch, body):
         raise Exception(p.stderr)
 
 
+def get_pr_train_contents(body):
+    result = re.search(PR_TRAIN_CONTENTS_PATTERN, body, re.S)
+    return result.group(1) if result else None
+
+
 def upsert_pr_train_contents_to_body(body, pr_train_contents):
     """
     Updates or appends PR train contents to the given body.
     """
-    pattern = r"<pr-train-toc>(.*)</pr-train-toc>"
-    is_in_body = re.search(pattern, body, re.S)
-    if is_in_body:
-        return re.sub(pattern, f"<pr-train-toc>{pr_train_contents}</pr-train-toc>", body)
+    if get_pr_train_contents(body):
+        return re.sub(
+            PR_TRAIN_CONTENTS_PATTERN,
+            f"<pr-train-toc>{pr_train_contents}</pr-train-toc>",
+            body,
+            flags=re.S,
+        )
     return f"{body}\n\n<pr-train-toc>{pr_train_contents}</pr-train-toc>\n"
 
+
+def get_pr_train_numbers_from_contents(pr_train_contents):
+    return re.findall(r"#(\d+)", pr_train_contents)
+
+
+def is_pr_merged(pr_number):
+    """
+    Returns whether the given pr number is merged
+    """
+    p = subprocess.run(
+        shlex.split(f"gh pr view --json state {int(pr_number)}"),
+        capture_output=True,
+        text=True,
+    )
+    result = json.loads(p.stdout)
+    return result["state"] == "MERGED"
 
 
 def main():
@@ -94,15 +120,30 @@ def main():
 
         base_branch = get_base_branch(branch)
 
+        pr = branch_pr_map[branch]
+
         pr_train = get_pr_train_branches(branch)
 
-        pr_train_numbers = [
+        new_pr_train_numbers = [
             branch_pr_map[branch]["number"]
             for branch in pr_train
             if branch_pr_map.get(branch)
         ]
 
-        pr = branch_pr_map[branch]
+        old_pr_train_contents = get_pr_train_contents(pr["body"])
+        old_pr_train_numbers = (
+            get_pr_train_numbers_from_contents(old_pr_train_contents)
+            if old_pr_train_contents
+            else []
+        )
+        prs_not_in_current = [
+            number
+            for number in old_pr_train_numbers
+            if number not in new_pr_train_numbers
+        ]
+        merged_prs = [number for number in prs_not_in_current if is_pr_merged(number)]
+
+        pr_train_numbers = merged_prs + new_pr_train_numbers
 
         pr_train_list = "\n".join(
             [
@@ -111,8 +152,10 @@ def main():
             ]
         )
 
-        pr_train_contents = f"\n\n## PR Train\n\n{pr_train_list}\n\n" if pr_train_numbers else ''
-        body = upsert_pr_train_contents_to_body(pr['body'], pr_train_contents)
+        pr_train_contents = (
+            f"\n\n## PR Train\n\n{pr_train_list}\n\n" if pr_train_numbers else ""
+        )
+        body = upsert_pr_train_contents_to_body(pr["body"], pr_train_contents)
 
         if body == pr["body"] and base_branch == pr["baseRefName"]:
             print(f"Skipped {Colors.GREEN}{branch}{Colors.NONE}")
