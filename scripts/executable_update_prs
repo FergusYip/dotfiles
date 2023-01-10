@@ -8,63 +8,119 @@ import sys
 
 
 class Colors:
-    GREEN = '\033[92m'
-    NONE = '\033[0m'
+    GREEN = "\033[92m"
+    NONE = "\033[0m"
 
-query = sys.argv[1] if len(sys.argv) == 2 else 'stack()'
 
-p = subprocess.run(["git", "branchless", "query", "-b", query], capture_output=True, text=True)
-branches = p.stdout.split('\n')
+def git_branchless_query_branches(query):
+    p = subprocess.run(
+        ["git", "branchless", "query", "-b", query], capture_output=True, text=True
+    )
+    branches = p.stdout.split("\n")
+    return branches
 
-p2 = subprocess.run(shlex.split("gh pr list -A '@me' --json 'number,baseRefName,headRefName,body'"),
-                    capture_output=True,
-                    text=True)
-open_prs = json.loads(p2.stdout)
 
-branch_pr_map = {pr['headRefName']: pr for pr in open_prs}
-branches_with_pr = [branch for branch in branches if branch_pr_map.get(branch)]
+def get_open_prs():
+    """
+    Returns list of open pull requests from GitHub
+    """
+    p = subprocess.run(
+        shlex.split("gh pr list -A '@me' --json 'number,baseRefName,headRefName,body'"),
+        capture_output=True,
+        text=True,
+    )
+    return json.loads(p.stdout)
 
-for i, branch in enumerate(branches_with_pr):
 
-    pr_train_p = subprocess.run(
-        ['git', 'branchless', 'query', '-b', f'stack() & (ancestors({branch}) + descendants({branch}))'],
-        capture_output=True, text=True)
-    pr_train = pr_train_p.stdout.strip().split('\n')
+def get_pr_train_branches(branch):
+    """
+    Return a list of strings containing branch names in the commit stack of the given branch
+    """
+    p = subprocess.run(
+        [
+            "git",
+            "branchless",
+            "query",
+            "-b",
+            f"stack() & (ancestors({branch}) + descendants({branch}))",
+        ],
+        capture_output=True,
+        text=True,
+    )
+    return p.stdout.strip().split("\n")
 
-    pr_train_numbers = [branch_pr_map[branch]['number'] for branch in pr_train if branch_pr_map.get(branch)]
 
-    pr = branch_pr_map[branch]
+def get_base_branch(branch):
+    """
+    For a given branch, return it's base/parent branch.
+    """
+    p = subprocess.run(
+        ["git", "branchless", "query", "-b", f"ancestors({branch}) - {branch} - green"],
+        capture_output=True,
+        text=True,
+    )
+    return p.stdout.strip().split("\n")[-1]
 
-    pr_train_list = '\n'.join(
-        [f'- #{number} 📍' if pr['number'] == number else f'- #{number}' for number in pr_train_numbers])
 
-    pr_train_markdown = f''
+def edit_github_pr(branch, base_branch, body):
+    edit_command = ["gh", "pr", "edit", branch, "-B", base_branch, "-b", body]
+    p = subprocess.run(edit_command, capture_output=True, text=True)
+    if p.returncode:
+        raise Exception(p.stderr)
 
-    base_branch_p = subprocess.run(['git', 'branchless', 'query', '-b', f"ancestors({branch}) - {branch} - green"],
-                                   capture_output=True, text=True)
-    base_branch = base_branch_p.stdout.strip().split('\n')[-1]
 
+def upsert_pr_train_contents_to_body(body, pr_train_contents):
+    """
+    Updates or appends PR train contents to the given body.
+    """
     pattern = r"<pr-train-toc>(.*)</pr-train-toc>"
-    result = re.search(pattern, pr['body'], re.S)
+    is_in_body = re.search(pattern, body, re.S)
+    if is_in_body:
+        return re.sub(pattern, f"<pr-train-toc>{pr_train_contents}</pr-train-toc>", body)
+    return f"{body}\n\n<pr-train-toc>{pr_train_contents}</pr-train-toc>\n"
 
-    body = pr['body']
-    if result :
-        if pr_train_numbers:
-            body = re.sub(pattern, f'<pr-train-toc>\n\n## PR Train\n\n{pr_train_list}\n\n</pr-train-toc>', body)
-        else:
-            body = re.sub(pattern, f'<pr-train-toc></pr-train-toc>', body)
-    else:
-        if pr_train_numbers:
-            body = f'{body}\n\n<pr-train-toc>\n\n## PR Train\n\n{pr_train_list}\n\n</pr-train-toc>\n'
 
-    if body == pr['body'] and base_branch == pr['baseRefName']:
-        print(f'Skipped {Colors.GREEN}{branch}{Colors.NONE}')
-        continue
 
-    edit_command = ['gh', 'pr', 'edit', branch, '-B', base_branch, '-b', body]
-    p3 = subprocess.run(edit_command, capture_output=True, text=True)
-    if p3.returncode:
-        print(p3.stderr, file=sys.stderr)
-        exit(1)
+def main():
+    query = sys.argv[1] if len(sys.argv) == 2 else "stack()"
 
-    print(f'Updated {Colors.GREEN}{branch}{Colors.NONE}')
+    branches = git_branchless_query_branches(query)
+    open_prs = get_open_prs()
+
+    branch_pr_map = {pr["headRefName"]: pr for pr in open_prs}
+    branches_with_pr = [branch for branch in branches if branch_pr_map.get(branch)]
+
+    for i, branch in enumerate(branches_with_pr):
+
+        base_branch = get_base_branch(branch)
+
+        pr_train = get_pr_train_branches(branch)
+
+        pr_train_numbers = [
+            branch_pr_map[branch]["number"]
+            for branch in pr_train
+            if branch_pr_map.get(branch)
+        ]
+
+        pr = branch_pr_map[branch]
+
+        pr_train_list = "\n".join(
+            [
+                f"- #{number} 📍" if pr["number"] == number else f"- #{number}"
+                for number in pr_train_numbers
+            ]
+        )
+
+        pr_train_contents = f"\n\n## PR Train\n\n{pr_train_list}\n\n" if pr_train_numbers else ''
+        body = upsert_pr_train_contents_to_body(pr['body'], pr_train_contents)
+
+        if body == pr["body"] and base_branch == pr["baseRefName"]:
+            print(f"Skipped {Colors.GREEN}{branch}{Colors.NONE}")
+            continue
+
+        edit_github_pr(branch, base_branch, body)
+        print(f"Updated {Colors.GREEN}{branch}{Colors.NONE}")
+
+
+if __name__ == "__main__":
+    main()
