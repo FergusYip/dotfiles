@@ -18,12 +18,12 @@ refreshPeriod = "168h"
 # exact = true
 # stripComponents = 1
 
-[".config/zsh/powerlevel10k"]
-    type = "git-repo"
-    url = "https://github.com/romkatv/powerlevel10k.git"
-    refreshPeriod = "168h"
-    [".config/zsh/powerlevel10k".clone]
-        args = ["--depth=1"] 
+# [".config/zsh/powerlevel10k"]
+#     type = "git-repo"
+#     url = "https://github.com/romkatv/powerlevel10k.git"
+#     refreshPeriod = "168h"
+#     [".config/zsh/powerlevel10k".clone]
+#         args = ["--depth=1"] 
 
 [".local/share/nvim/site/autoload/plug.vim"]
 type = "file"

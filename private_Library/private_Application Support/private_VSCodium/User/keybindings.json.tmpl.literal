@@ -1,1 +1,2 @@
-{{- template "vscode/keybindings.json" . -}}
+{{ template "keybindings.json" . }}
+
