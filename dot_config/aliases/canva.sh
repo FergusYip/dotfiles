@@ -4,7 +4,10 @@ alias gcgm="git checkout master && git pull"
 
 # Lunch
 lunch() {
-    open "https://canv.am/lunch#$((`date +%u` + 1))"
+    open "https://canv.am/lunch-sydney"
 }
 
+
+alias wp="bin/webpack-dev-server"
+alias sb="bin/webpack-dev-server"
 
