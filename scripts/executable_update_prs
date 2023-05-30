@@ -61,7 +61,7 @@ def get_base_branch(branch):
         capture_output=True,
         text=True,
     )
-    return p.stdout.strip().split("\n")[-1]
+    return p.stdout.strip().split("\n")[-1] or "master"
 
 
 def edit_github_pr(branch, base_branch, body):
