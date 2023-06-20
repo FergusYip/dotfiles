@@ -11,3 +11,5 @@ lunch() {
 alias wp="bin/webpack-dev-server"
 alias sb="bin/storybook_single.sh"
 
+alias fina="fin && git diff --quiet && git diff --cached --quiet"
+
