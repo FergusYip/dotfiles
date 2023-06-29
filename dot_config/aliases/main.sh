@@ -52,5 +52,9 @@ alias gc="git checkout"
 alias gcb="git checkout -b"
 alias gcd="git checkout -d"
 
+report () {
+    $@ && say "Done" || say "Failed"
+}
+
 [ -f ~/.config/aliases/canva.sh ] && source ~/.config/aliases/canva.sh
 
