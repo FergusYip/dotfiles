@@ -10,3 +10,5 @@ lunch() {
 alias wp="bin/webpack-dev-server"
 alias sb="bin/storybook_single.sh"
 
+alias fin="yarn fin"
+
