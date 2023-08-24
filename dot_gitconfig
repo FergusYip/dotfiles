@@ -23,7 +23,8 @@
     pull-green = fetch origin green:green
     pull-master = fetch origin master:master
 
-    delta = ! git diff | delta
+    delta = ! git diff $@ | delta
+    deltap = ! git diff `git query -b 'ancestors(.)' | tail -1` | delta
 
     sls = sl 'stack() | branches() | heads(draft())'
     hiderD = hide -r -D
