@@ -17,6 +17,7 @@
 	s = status
 	suno = status -uno
 	c = checkout
+	cp = cherry-pick
     show-files = show --name-only
     diff-files = diff --name-only
 
