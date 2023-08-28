@@ -24,7 +24,7 @@
     pull-green = fetch origin green:green
     pull-master = fetch origin master:master
 
-    prev-branch = ! git query -b 'ancestors(.)' | tail -1
+    prev-branch = ! git query -b 'ancestors(.) - green - .' | tail -1
 
     delta = ! git diff $@ | delta
     deltap = ! git diff `git query -b 'ancestors(.)' | tail -1` | delta
