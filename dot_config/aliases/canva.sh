@@ -10,5 +10,20 @@ lunch() {
 alias wp="bin/webpack-dev-server"
 alias sb="bin/storybook_single.sh"
 
-alias fin="yarn fin"
+fin() {
+  cur_dir=$(basename "$PWD")
+
+  if [ "$cur_dir" != "web" ]; then
+    if [ -d "web" ]; then
+      cd web
+    else
+      echo 'not in web and web does not exist' >&2
+      return 1
+    fi
+  fi
+
+  yarn fin $@
+}
+
+PSEUDO_MANGLE_PROPERTIES=true
 
