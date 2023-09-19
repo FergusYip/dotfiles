@@ -35,6 +35,10 @@ nmap <S-l> <action>(NextTab)
 nmap <C-h> <action>(PrevSplitter)
 nmap <C-l> <action>(NextSplitter)
 
+map gD <Action>(GotoTypeDeclaration)
+map gr <Action>(FindUsages)
+map gi <Action>(QuickImplementations)
+
 vnoremap < <gv
 vnoremap > >gv
 
