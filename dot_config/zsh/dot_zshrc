@@ -137,7 +137,7 @@ export ASDF_CONFIG_FILE=$HOME/.config/asdf/.asdfrc
 [ -f "/usr/local/opt/asdf/asdf.sh" ] && source /usr/local/opt/asdf/asdf.sh # pacman install
 # [ -f "/opt/homebrew/opt/asdf/libexec/asdf.sh" ] && source "/opt/homebrew/opt/asdf/libexec/asdf.sh" # homebrew install
 
-source "/opt/homebrew/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.zsh.inc"
+[ -f "/opt/homebrew/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.zsh.inc" ] && source "/opt/homebrew/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.zsh.inc"
 
 [ -f ~/.config/credentials ] && source ~/.config/credentials
 [ -f ~/.config/private_aliases ] && source ~/.config/private_aliases
