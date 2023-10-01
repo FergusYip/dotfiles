@@ -80,6 +80,7 @@ preexec() { echo -ne '\e[5 q'; } # Use beam shape cursor for each new prompt.
 export PATH=/Library/PostgreSQL/12/bin:$PATH
 export PGDATA="/Library/PostgreSQL/12/data"
 
+export PATH="$PATH:$HOME/.pub-cache/bin"
 export PATH=~/Library/flutter/bin:$PATH
 export ANDROID_HOME=$HOME/Library/Android/sdk
 export PATH=$PATH:$ANDROID_HOME/emulator
