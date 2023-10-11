@@ -52,9 +52,12 @@ alias gc="git checkout"
 alias gcb="git checkout -b"
 alias gcd="git checkout -d"
 
+alias lg="lazygit"
+
 report () {
     $@ && say "Done" || say "Failed"
 }
 
 [ -f ~/.config/aliases/canva.sh ] && source ~/.config/aliases/canva.sh
 
+alias decolor='sed -r "s/\x1B\[([0-9]{1,3}(;[0-9]{1,2})?)?[mGK]//g"'
