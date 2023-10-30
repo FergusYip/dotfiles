@@ -27,3 +27,5 @@ fin() {
 
 PSEUDO_MANGLE_PROPERTIES=true
 
+alias ownership=~/work/canva/tools/code_review/ownership
+
