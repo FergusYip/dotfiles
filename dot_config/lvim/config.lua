@@ -3,9 +3,39 @@
 -- Forum: https://www.reddit.com/r/lunarvim/
 -- Discord: https://discord.com/invite/Xb9B4Ny
 
+
+vim.opt.wrap = true
+lvim.colorscheme = "dracula"
 lvim.format_on_save.enabled = true
 
-lvim.plugins = {
-  { "christoomey/vim-tmux-navigator" },
+
+lvim.keys.normal_mode["<S-h>"] = ":bprev<CR>"
+lvim.keys.normal_mode["<S-l>"] = ":bnext<CR>"
+
+lvim.builtin.which_key.mappings["f"] = {
+  "<cmd>FzfLua files<CR>", "Find File"
+}
+lvim.builtin.which_key.mappings["s"]["f"] = {
+  "<cmd>FzfLua files<CR>", "Find File"
+}
+lvim.builtin.which_key.mappings["s"]["t"] = {
+  "<cmd>FzfLua live_grep_native<CR>", "Text"
 }
 
+lvim.plugins = {
+  { "dracula/vim" },
+  { "christoomey/vim-tmux-navigator" },
+  {
+    "ibhagwan/fzf-lua",
+    -- optional for icon support
+    dependencies = { "nvim-tree/nvim-web-devicons" },
+    config = function()
+      -- calling `setup` is optional for customization
+      require("fzf-lua").setup({
+        winopts = {
+          fullscreen = true
+        }
+      })
+    end
+  },
+}
