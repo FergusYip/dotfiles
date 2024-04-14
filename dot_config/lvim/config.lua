@@ -5,10 +5,15 @@
 
 
 vim.opt.wrap = true
+vim.opt.autochdir = false
+vim.opt.relativenumber = true
 lvim.colorscheme = "dracula"
 lvim.format_on_save.enabled = true
 
+lvim.builtin.nvimtree.setup.sync_root_with_cwd = false
 
+lvim.keys.normal_mode["<C-d>"] = "<C-d>zz"
+lvim.keys.normal_mode["<C-u>"] = "<C-u>zz"
 lvim.keys.normal_mode["<S-h>"] = ":bprev<CR>"
 lvim.keys.normal_mode["<S-l>"] = ":bnext<CR>"
 
