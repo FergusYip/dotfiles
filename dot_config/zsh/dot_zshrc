@@ -102,15 +102,12 @@ export AWS_PROFILE=default
 
 
 # https://github.com/ajeetdsouza/zoxide
-eval "$(zoxide init zsh)"
-eval "$(thefuck --alias)"
-eval "$(direnv hook $SHELL)"
+which zoxide && eval "$(zoxide init zsh)"
+which direnv && eval "$(direnv hook $SHELL)"
 
 export EDITOR="nvim"
 alias vim='nvim'
 alias vi='nvim'
-
-
 
 source "$ZDOTDIR/powerlevel10k/powerlevel10k.zsh-theme"
 
@@ -138,7 +135,7 @@ export ASDF_CONFIG_FILE=$HOME/.config/asdf/.asdfrc
 [ -f "/usr/local/opt/asdf/asdf.sh" ] && source /usr/local/opt/asdf/asdf.sh # pacman install
 # [ -f "/opt/homebrew/opt/asdf/libexec/asdf.sh" ] && source "/opt/homebrew/opt/asdf/libexec/asdf.sh" # homebrew install
 
-[ -f "/opt/homebrew/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.zsh.inc" ] && source "/opt/homebrew/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.zsh.inc"
+# [ -f "/opt/homebrew/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.zsh.inc" ] && source "/opt/homebrew/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.zsh.inc"
 
 [ -f ~/.config/credentials ] && source ~/.config/credentials
 [ -f ~/.config/private_aliases ] && source ~/.config/private_aliases
