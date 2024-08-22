@@ -102,8 +102,8 @@ export AWS_PROFILE=default
 
 
 # https://github.com/ajeetdsouza/zoxide
-which zoxide && eval "$(zoxide init zsh)"
-which direnv && eval "$(direnv hook $SHELL)"
+which zoxide >/dev/null && eval "$(zoxide init zsh)"
+which direnv >/dev/null && eval "$(direnv hook $SHELL)"
 
 export EDITOR="nvim"
 alias vim='nvim'
