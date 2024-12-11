@@ -14,7 +14,7 @@ alias_if_exists () {
     return 1
 }
 
-alias_if_exists ls exa
+alias_if_exists ls eza
 alias ll='ls -alh'
 alias la='ls -a'
 
