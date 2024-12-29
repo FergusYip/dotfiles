@@ -22,10 +22,25 @@ fin() {
     fi
   fi
 
-  yarn fin $@
+  pnpm fin --compact --reduceAnimations $@
+}
+
+protogaps() {                                                            
+  grep -oEi '(=\s*\d+[ ;])|(reserved\s+\d+)' "$1" | grep -oE '\d+' | sort -h | awk '$1!=n+1&&$1>n{print n+1"-"$1-1}{n=$1}'
 }
 
 PSEUDO_MANGLE_PROPERTIES=true
 
 alias ownership=~/work/canva/tools/code_review/ownership
+
+# Nix
+if [ -e '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh' ]; then
+  . '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh'
+fi
+# End Nix
+
+# CoderEnv
+# DO NOT EDIT: Added by Coder CLI installer (https://coder.canva-internal.com/install.sh)
+[ -e "/Users/fergus/.coder.sh" ] && . "/Users/fergus/.coder.sh"
+# EndCoderEnv
 
