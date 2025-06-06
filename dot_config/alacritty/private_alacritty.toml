@@ -21,13 +21,9 @@ style = "Italic"
 family = "MesloLGS Nerd Font"
 style = "Regular"
 
-[[mouse.bindings]]
-action = "PasteSelection"
-mouse = "Right"
-
 [terminal.shell]
 args = ["-l", "-c", "tmux attach 2>/dev/null || tmux"]
-program = "/bin/zsh"
+program = "/bin/sh"
 
 [window]
 
