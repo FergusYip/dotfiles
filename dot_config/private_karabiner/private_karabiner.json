@@ -32,6 +32,21 @@
                 "type": "basic"
               }
             ]
+          },
+          {
+            "description": "Disable command+tab",
+            "manipulators": [
+              {
+                "from": {
+                  "key_code": "tab",
+                  "modifiers": {
+                    "mandatory": ["left_command"]
+                  }
+                },
+                "to": [],
+                "type": "basic"
+              }
+            ]
           }
         ]
       },
