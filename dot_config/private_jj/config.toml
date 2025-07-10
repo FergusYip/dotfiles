@@ -1,0 +1,15 @@
+"$schema" = "https://jj-vcs.github.io/jj/latest/config-schema.json"
+
+[user]
+name = "Fergus Yip"
+email = "fergus@canva.com"
+
+[templates]
+git_push_bookmark = '"fergus-" ++ change_id.short()'
+
+[ui]
+default-command = ["log", "--reversed", "--no-pager"]
+diff-formatter = ["difft", "--color=always", "$left", "$right"]
+conflict-marker-style = "git"
+
+
