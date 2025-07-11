@@ -17,10 +17,6 @@ fi
 #   export EDITOR='mvim'
 # fi
 
-# ZSH History
-HISTSIZE=1002
-SAVEHIST=1000
-
 # How many lines of history to keep in memory
 HISTSIZE=5000               
 # Where to save history to disk
