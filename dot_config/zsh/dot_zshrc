@@ -1,32 +1,16 @@
-# export MANPATH="/usr/local/man:$MANPATH"
-eval "$(starship init zsh)"
+which starship >/dev/null && eval "$(starship init zsh)"
 
 # You may need to manually set your language environment
 # export LANG=en_US.UTF-8
 
-# Preferred editor for local and remote sessions
-# if [[ -n $SSH_CONNECTION ]]; then
-#   export EDITOR='vim'
-# else
-#   export EDITOR='mvim'
-# fi
-
-# How many lines of history to keep in memory
 HISTSIZE=5000               
-# Where to save history to disk
 HISTFILE=$ZDOTDIR/.zsh_history
-# Number of history entries to save to disk
 SAVEHIST=5000
-# Erase duplicates in the history file
-# HISTDUP=erase               
 
 # setopt appendhistory    # Append history to the history file (no overwriting)
 setopt SHARE_HISTORY      # Share history across terminals
 setopt HIST_IGNORE_DUPS
 setopt INC_APPEND_HISTORY  # Immediately append to the history file, not just when a term is killed
-
-# Colored Man pages
-export MANPAGER="less -R --use-color -Dd+r -Du+b"
 
 # Basic auto/tab complete:
 autoload -U compinit
@@ -119,7 +103,7 @@ export ASDF_CONFIG_FILE=$HOME/.config/asdf/.asdfrc
 [ -f "$HOME/.asdf/asdf.sh" ] && source $HOME/.asdf/asdf.sh # git install
 [ -f "/usr/local/opt/asdf/asdf.sh" ] && source /usr/local/opt/asdf/asdf.sh # pacman install
 # [ -f "/opt/homebrew/opt/asdf/libexec/asdf.sh" ] && source "/opt/homebrew/opt/asdf/libexec/asdf.sh" # homebrew install
-export PATH="${ASDF_DATA_DIR:-$HOME/.asdf}/shims:$PATH"
+export PATH="$PATH:${ASDF_DATA_DIR:-$HOME/.asdf}/shims"
 
 [ -f ~/.config/credentials ] && source ~/.config/credentials
 [ -f ~/.config/private_aliases ] && source ~/.config/private_aliases
