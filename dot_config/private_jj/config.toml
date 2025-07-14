@@ -12,4 +12,8 @@ default-command = ["log", "--reversed", "--no-pager"]
 diff-formatter = ["difft", "--color=always", "$left", "$right"]
 conflict-marker-style = "git"
 
+[aliases]
+diff-ts = ["util", "exec", "--", "sh", "-c", """
+jj diff $@ $(jj diff $@ --name-only | grep -E '\\.ts\\.?$')
+""", ""]
 
