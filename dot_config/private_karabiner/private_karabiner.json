@@ -30,6 +30,19 @@
                         ]
                     },
                     {
+                        "description": "Open Zed with alt+z",
+                        "manipulators": [
+                            {
+                                "from": {
+                                    "key_code": "z",
+                                    "modifiers": { "mandatory": ["left_option"] }
+                                },
+                                "to": [{ "shell_command": "osascript -e 'if application \"Zed\" is running then tell application \"Zed\" to activate'" }],
+                                "type": "basic"
+                            }
+                        ]
+                    },
+                    {
                         "description": "Open browser with alt+b",
                         "manipulators": [
                             {
