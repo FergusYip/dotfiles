@@ -1,15 +1,3 @@
-# Git
-alias gcgp="git checkout green && git pull"
-alias gcgm="git checkout master && git pull"
-
-# Lunch
-lunch() {
-    open "https://canv.am/lunch-sydney"
-}
-
-alias wp="bin/webpack-dev-server"
-alias sb="bin/storybook_single.sh"
-
 fin() {
   cur_dir=$(basename "$PWD")
 
@@ -44,3 +32,4 @@ fi
 [ -e "/Users/fergus/.coder.sh" ] && . "/Users/fergus/.coder.sh"
 # EndCoderEnv
 
+alias claude='otter claude-code --model=opus'
