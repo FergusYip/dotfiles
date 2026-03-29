@@ -33,5 +33,5 @@ fi
 # EndCoderEnv
 
 alias claude='otter claude-code --model=opus'
-alias custard='ssh -o 'SetEnv TERM=xterm-256color' coder.fergus-custard -t "tmux new-session -A -s main"'
-alias bao='ssh -o 'SetEnv TERM=xterm-256color' coder.fergus-bao -t "tmux new-session -A -s main"'
+alias custard="ssh -o 'SetEnv TERM=xterm-256color' coder.fergus-custard -t 'tmux new-session -A -s main'"
+alias bao="ssh -o 'SetEnv TERM=xterm-256color' coder.fergus-bao -t 'tmux new-session -A -s main'"
