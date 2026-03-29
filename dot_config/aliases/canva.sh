@@ -13,7 +13,7 @@ fin() {
   pnpm fin --compact --reduceAnimations $@
 }
 
-protogaps() {                                                            
+protogaps() {
   grep -oEi '(=\s*\d+[ ;])|(reserved\s+\d+)' "$1" | grep -oE '\d+' | sort -h | awk '$1!=n+1&&$1>n{print n+1"-"$1-1}{n=$1}'
 }
 
@@ -33,3 +33,5 @@ fi
 # EndCoderEnv
 
 alias claude='otter claude-code --model=opus'
+alias custard='ssh -o 'SetEnv TERM=xterm-256color' coder.fergus-custard -t "tmux new-session -A -s main"'
+alias bao='ssh -o 'SetEnv TERM=xterm-256color' coder.fergus-bao -t "tmux new-session -A -s main"'
