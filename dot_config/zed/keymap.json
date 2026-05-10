@@ -1,0 +1,56 @@
+[
+  {
+    "context": "Editor && vim_mode == normal",
+    "bindings": {
+      "shift-h": "pane::ActivatePreviousItem",
+      "shift-l": "pane::ActivateNextItem",
+      "ctrl-h": "workspace::ActivatePaneLeft",
+      "ctrl-j": "workspace::ActivatePaneDown",
+      "ctrl-k": "workspace::ActivatePaneUp",
+      "ctrl-l": "workspace::ActivatePaneRight",
+      // "shift shift": "file_finder::Toggle"
+    },
+  },
+  {
+    "context": "Editor && vim_mode == insert",
+    "bindings": {
+      // "j k": "vim::NormalBefore"
+    },
+  },
+  {
+    "context": "AgentPanel",
+    "unbind": {
+      "cmd-i": "agent::ToggleProfileSelector",
+    },
+  },
+  {
+    "context": "AcpThread > Editor",
+    "unbind": {
+      "cmd-i": "agent::ToggleProfileSelector",
+    },
+  },
+  {
+    "context": "DebugPanel",
+    "unbind": {
+      "cmd-i": "debugger::ToggleSessionPicker",
+    },
+  },
+  {
+    "context": "Editor",
+    "unbind": {
+      "cmd-i": "editor::ShowSignatureHelp",
+    },
+  },
+  {
+    "context": "Editor && mode == full",
+    "bindings": {
+      "cmd-i": "agent::AddSelectionToThread",
+    },
+  },
+  {
+    "context": "Editor && mode == full",
+    "unbind": {
+      "cmd->": "agent::AddSelectionToThread",
+    },
+  },
+]
