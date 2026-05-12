@@ -58,6 +58,6 @@ report () {
     $@ && say "Done" || say "Failed"
 }
 
-[[ -d ~/work/canva ]] && source ~/.config/aliases/canva.sh
+command -v roo >/dev/null 2>&1 && source ~/.config/aliases/canva.sh
 
 alias decolor='sed -r "s/\x1B\[([0-9]{1,3}(;[0-9]{1,2})?)?[mGK]//g"'
