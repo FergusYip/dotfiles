@@ -32,6 +32,17 @@ fi
 [ -e "/Users/fergus/.coder.sh" ] && . "/Users/fergus/.coder.sh"
 # EndCoderEnv
 
-alias custard="ssh -o 'SetEnv TERM=xterm-256color' coder.fergus-custard -t 'tmux new-session -A -s main'"
-alias bao="ssh -o 'SetEnv TERM=xterm-256color' coder.fergus-bao -t 'tmux new-session -A -s main'"
+custard() {
+  while true; do
+    ssh -o 'SetEnv TERM=xterm-256color' coder.fergus-custard -t 'tmux new-session -A -s main'
+    sleep 1
+  done
+}
+
+bao() {
+  while true; do
+    ssh -o 'SetEnv TERM=xterm-256color' coder.fergus-bao -t 'tmux new-session -A -s main'
+    sleep 1
+  done
+}
 
