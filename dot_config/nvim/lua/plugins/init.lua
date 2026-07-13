@@ -31,6 +31,13 @@ return {
     end,
   },
 
+  {
+    "ibhagwan/fzf-lua",
+    cmd = "FzfLua",
+    dependencies = { "nvim-tree/nvim-web-devicons" },
+    opts = { "default-title" },
+  },
+
   -- test new blink
   -- { import = "nvchad.blink.lazyspec" },
 
