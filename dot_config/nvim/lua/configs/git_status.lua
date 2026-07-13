@@ -10,7 +10,7 @@ function M.open()
   local conf = require("telescope.config").values
 
   local show_untracked = false
-  local opts = { cwd = vim.fn.getcwd() }
+  local opts = { cwd = vim.fn.getcwd(), split_char = "\0" }
 
   local function finder()
     return finders.new_oneshot_job({
