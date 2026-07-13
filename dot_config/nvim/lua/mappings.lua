@@ -16,8 +16,8 @@ local map = vim.keymap.set
 
 map("n", ";", ":", { desc = "CMD enter command mode" })
 map("i", "jk", "<ESC>")
-map("n", "<leader>gs", "<cmd>GitStatusFast<CR>", { desc = "Git status (fast)" })
-map("n", "<leader>gu", "<cmd>Telescope git_status<CR>", { desc = "Git status" })
+map("n", "<leader>gs", "<cmd>GitStatusFast<CR>", { desc = "Git status" })
+map("n", "<leader>gu", "<cmd>Telescope git_status<CR>", { desc = "Git status (includes untracked)" })
 map("n", "<leader>q", "<cmd>quit<CR>", { desc = "Quit window" })
 map("n", "<leader>fs", "<cmd>Telescope grep_string<CR>", { desc = "grep word under cursor" })
 map("n", "<leader>la", vim.lsp.buf.code_action, { desc = "LSP code action" })
