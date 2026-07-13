@@ -14,18 +14,14 @@ return {
   },
 
   {
-    "georgeguimaraes/review.nvim",
-    version = "v1.9.1",
-    dependencies = {
-      "esmuellert/codediff.nvim",
-      "MunifTanjim/nui.nvim",
-    },
-    cmd = { "Review" },
-    keys = {
-      { "<leader>r", "<cmd>Review<cr>", desc = "Review" },
-      { "<leader>R", "<cmd>Review commits<cr>", desc = "Review commits" },
-    },
-    opts = {},
+    "nvim-telescope/telescope.nvim",
+    cmd = { "Telescope", "GitStatusFast" },
+    config = function(_, opts)
+      require("telescope").setup(opts)
+      vim.api.nvim_create_user_command("GitStatusFast", function()
+        require("configs.git_status").open()
+      end, {})
+    end,
   },
 
   -- test new blink
