@@ -3,6 +3,12 @@ require "nvchad.mappings"
 pcall(vim.keymap.del, "n", "<leader>fm")
 pcall(vim.keymap.del, "x", "<leader>fm")
 
+require("which-key").add {
+  { "<leader>f", group = "Find", mode = "n" },
+  { "<leader>g", group = "Git", mode = "n" },
+  { "<leader>l", group = "LSP", mode = "n" },
+}
+
 -- add yours here
 
 local map = vim.keymap.set
