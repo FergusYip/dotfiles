@@ -16,6 +16,12 @@ local map = vim.keymap.set
 
 map("n", ";", ":", { desc = "CMD enter command mode" })
 map("i", "jk", "<ESC>")
+map("n", "H", function()
+  require("nvchad.tabufline").prev()
+end, { desc = "Previous buffer" })
+map("n", "L", function()
+  require("nvchad.tabufline").next()
+end, { desc = "Next buffer" })
 map("n", "<leader>gs", "<cmd>GitStatusFast<CR>", { desc = "Git status" })
 map("n", "<leader>gu", "<cmd>Telescope git_status<CR>", { desc = "Git status (includes untracked)" })
 map("n", "<leader>q", "<cmd>quit<CR>", { desc = "Quit window" })
