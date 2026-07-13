@@ -1,5 +1,8 @@
 require "nvchad.mappings"
 
+pcall(vim.keymap.del, "n", "<leader>fm")
+pcall(vim.keymap.del, "x", "<leader>fm")
+
 -- add yours here
 
 local map = vim.keymap.set
