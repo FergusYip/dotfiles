@@ -14,6 +14,13 @@ return {
   },
 
   {
+    "folke/which-key.nvim",
+    opts = {
+      delay = 0,
+    },
+  },
+
+  {
     "nvim-telescope/telescope.nvim",
     cmd = { "Telescope", "GitStatusFast" },
     config = function(_, opts)
