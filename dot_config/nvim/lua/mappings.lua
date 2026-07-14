@@ -3,11 +3,16 @@ require "nvchad.mappings"
 pcall(vim.keymap.del, "n", "<leader>fm")
 pcall(vim.keymap.del, "x", "<leader>fm")
 pcall(vim.keymap.del, "n", "<leader>gt")
+pcall(vim.keymap.del, "n", "<leader>ds")
+pcall(vim.keymap.del, "n", "<leader>cm")
+pcall(vim.keymap.del, "n", "<leader>ma")
+pcall(vim.keymap.del, "n", "<leader>pt")
 
 require("which-key").add {
   { "<leader>f", group = "Find", mode = "n" },
   { "<leader>g", group = "Git", mode = "n" },
   { "<leader>l", group = "LSP", mode = "n" },
+  { "<leader>w", group = "WhichKey", mode = "n" },
 }
 
 -- add yours here
@@ -22,12 +27,15 @@ end, { desc = "Previous buffer" })
 map("n", "L", function()
   require("nvchad.tabufline").next()
 end, { desc = "Next buffer" })
+map("n", "<leader>gc", "<cmd>Telescope git_commits<CR>", { desc = "Git commits" })
 map("n", "<leader>gs", "<cmd>GitStatusFast<CR>", { desc = "Git status" })
 map("n", "<leader>gu", "<cmd>Telescope git_status<CR>", { desc = "Git status (includes untracked)" })
 map("n", "<leader>q", "<cmd>quit<CR>", { desc = "Quit window" })
 map("n", "<leader>ff", "<cmd>FzfLua files<CR>", { desc = "Find files" })
 map("n", "<leader>fa", "<cmd>FzfLua files hidden=true no_ignore=true follow=true<CR>", { desc = "Find all files" })
 map("n", "<leader>fs", "<cmd>FzfLua grep_cword<CR>", { desc = "Grep word under cursor" })
+map("n", "<leader>fm", "<cmd>Telescope marks<CR>", { desc = "Find marks" })
+map("n", "<leader>ft", "<cmd>Telescope terms<CR>", { desc = "Find terminals" })
 map("n", "<leader>la", vim.lsp.buf.code_action, { desc = "LSP code action" })
 map("n", "<leader>lh", vim.lsp.buf.hover, { desc = "LSP hover" })
 map("n", "<leader>lr", "<cmd>Telescope lsp_references<CR>", { desc = "LSP references" })
