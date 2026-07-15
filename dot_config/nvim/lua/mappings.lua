@@ -12,7 +12,7 @@ require("which-key").add {
   { "<leader>f", group = "Find", mode = "n" },
   { "<leader>g", group = "Git", mode = "n" },
   { "<leader>l", group = "LSP", mode = "n" },
-  { "<leader>w", group = "WhichKey", mode = "n" },
+  { "<leader>y", group = "Yank", mode = "n" },
 }
 
 -- add yours here
@@ -21,6 +21,7 @@ local map = vim.keymap.set
 
 map("n", ";", ":", { desc = "CMD enter command mode" })
 map("i", "jk", "<ESC>")
+map("n", "<leader>w", "<cmd>write<CR>", { desc = "Write file" })
 map("n", "H", function()
   require("nvchad.tabufline").prev()
 end, { desc = "Previous buffer" })
@@ -36,6 +37,21 @@ map("n", "<leader>fa", "<cmd>FzfLua files hidden=true no_ignore=true follow=true
 map("n", "<leader>fs", "<cmd>FzfLua grep_cword<CR>", { desc = "Grep word under cursor" })
 map("n", "<leader>fm", "<cmd>Telescope marks<CR>", { desc = "Find marks" })
 map("n", "<leader>ft", "<cmd>Telescope terms<CR>", { desc = "Find terminals" })
+local function copy_file_path(modifier, label)
+  local path = vim.fn.fnamemodify(vim.fn.expand "%:p", modifier)
+  if path == "" then
+    return
+  end
+  vim.fn.setreg("+", path)
+  vim.notify("Copied " .. label .. " path: " .. path)
+end
+
+map("n", "<leader>yp", function()
+  copy_file_path(":.", "relative")
+end, { desc = "Copy relative file path" })
+map("n", "<leader>ya", function()
+  copy_file_path(":p", "absolute")
+end, { desc = "Copy absolute file path" })
 map("n", "<leader>la", vim.lsp.buf.code_action, { desc = "LSP code action" })
 map("n", "<leader>lh", vim.lsp.buf.hover, { desc = "LSP hover" })
 map("n", "<leader>lr", "<cmd>Telescope lsp_references<CR>", { desc = "LSP references" })
