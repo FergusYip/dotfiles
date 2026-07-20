@@ -8,7 +8,7 @@ prompt: enabled
 pager:
 # Aliases allow you to create nicknames for gh commands
 aliases:
-    co: '!id=`gh pr list -A FergusYip | column -s "	" -t | fzf | cut -f1`; [ -n "$id" ] && gh pr checkout "$id"'
+    co: '!selection=$(gh pr list --author "@me" --limit 100 | column -t -s "	" | fzf); id=${selection%% *}; [ -n "$id" ] && gh pr checkout "$id"'
     mpr: pr list -A FergusYip
     pv: '!gh pr view | less'
     check-merge: pr comment -b ':rocket:[canva-check-merge]'
