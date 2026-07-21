@@ -44,4 +44,6 @@
 
 theme = Dracula
 
+clipboard-paste-protection = false
+
 keybind = shift+enter=text:\n
