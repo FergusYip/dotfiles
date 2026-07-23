@@ -14,6 +14,26 @@ M.base46 = {
 	-- },
 }
 
+M.ui = {
+	statusline = {
+		modules = {
+			file = function()
+				local utils = require "nvchad.stl.utils"
+				local path = vim.api.nvim_buf_get_name(utils.stbufnr())
+				local name = path == "" and "Empty" or vim.fn.fnamemodify(path, ":.")
+				local icon = utils.file()[1]
+				local style = require("nvconfig").ui.statusline.separator_style
+				local separators = type(style) == "table" and style or utils.separators[style]
+
+				-- A literal percent sign otherwise has special meaning in a statusline.
+				name = name:gsub("%%", "%%%%")
+
+				return "%#St_file# " .. icon .. " " .. name .. " %#St_file_sep#" .. separators.right
+			end,
+		},
+	},
+}
+
 -- M.nvdash = { load_on_startup = true }
 -- M.ui = {
 --       tabufline = {

@@ -34,6 +34,7 @@ map("n", "<leader>gu", "<cmd>Telescope git_status<CR>", { desc = "Git status (in
 map("n", "<leader>q", "<cmd>quit<CR>", { desc = "Quit window" })
 map("n", "<leader>ff", "<cmd>FzfLua files<CR>", { desc = "Find files" })
 map("n", "<leader>fa", "<cmd>FzfLua files hidden=true no_ignore=true follow=true<CR>", { desc = "Find all files" })
+map("n", "<leader>fw", "<cmd>FzfLua live_grep<CR>", { desc = "Live grep" })
 map("n", "<leader>fs", "<cmd>FzfLua grep_cword<CR>", { desc = "Grep word under cursor" })
 map("n", "<leader>fm", "<cmd>Telescope marks<CR>", { desc = "Find marks" })
 map("n", "<leader>ft", "<cmd>Telescope terms<CR>", { desc = "Find terminals" })
