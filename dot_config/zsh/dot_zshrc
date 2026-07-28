@@ -85,7 +85,6 @@ export EDITOR="nvim"
 alias vim='nvim'
 alias vi='nvim'
 
-source "$ZDOTDIR/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
 source "$ZDOTDIR/zsh-autosuggestions/zsh-autosuggestions.zsh"
 
 [[ ! -f $ZDOTDIR/goto.sh ]] || source $ZDOTDIR/goto.sh
@@ -97,6 +96,8 @@ fi
 
 [ -f "$HOME/.ghcup/env" ] && source "$HOME/.ghcup/env" # ghcup-env
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+[ -f "$ZDOTDIR/fzf/pull-requests.zsh" ] && source "$ZDOTDIR/fzf/pull-requests.zsh"
+[ -f "$ZDOTDIR/fzf/git-files.zsh" ] && source "$ZDOTDIR/fzf/git-files.zsh"
 
 # asdf runtime version manager
 export ASDF_CONFIG_FILE=$HOME/.config/asdf/.asdfrc
@@ -109,3 +110,5 @@ export PATH="$PATH:${ASDF_DATA_DIR:-$HOME/.asdf}/shims"
 [ -f ~/.config/private_aliases ] && source ~/.config/private_aliases
 source ~/.config/aliases/main.sh
 
+# Must be sourced after all other ZLE widgets.
+source "$ZDOTDIR/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
