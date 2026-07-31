@@ -1,6 +1,10 @@
 // Keep terminal application keybindings (especially Vim's Ctrl bindings)
 // available until Zellij is explicitly unlocked with Ctrl-g.
+default_shell "zsh"
 default_mode "locked"
+default_layout "compact"
+theme "dracula"
+pane_frames true
 scrollback_editor "nvim"
 
 // Zellij's built-in "Unlock First (non-colliding)" preset is tracked here
@@ -151,6 +155,7 @@ keybinds clear-defaults=true {
         bind "Esc" { SwitchToMode "Locked"; }
     }
     shared_among "normal" "locked" {
+        bind "Ctrl a" { SwitchToMode "Tab"; }
         bind "Alt n" { NewPane; }
         bind "Alt f" { ToggleFloatingPanes; }
         bind "Alt i" { MoveTab "Left"; }
