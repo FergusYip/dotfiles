@@ -34,15 +34,14 @@ fi
 
 custard() {
   while true; do
-    ssh -o 'SetEnv TERM=xterm-256color' coder.fergus-custard -t 'tmux new-session -A -s main'
+    ssh -t coder.fergus-custard 'tmux new-session -A -s main'
     sleep 1
   done
 }
 
 bao() {
   while true; do
-    ssh -o 'SetEnv TERM=xterm-256color' coder.fergus-bao -t 'tmux new-session -A -s main'
+    ssh -t coder.fergus-bao 'zellij attach --create main'
     sleep 1
   done
 }
-
