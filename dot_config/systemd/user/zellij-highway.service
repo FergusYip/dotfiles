@@ -1,0 +1,14 @@
+[Unit]
+Description=Infra Highway tunnel for Zellij web
+After=network-online.target zellij-web.service
+Wants=network-online.target
+Requires=zellij-web.service
+
+[Service]
+Type=simple
+ExecStart=/usr/local/bin/infra highway http 8082
+Restart=on-failure
+RestartSec=10
+
+[Install]
+WantedBy=default.target

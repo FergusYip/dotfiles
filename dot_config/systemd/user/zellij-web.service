@@ -1,0 +1,13 @@
+[Unit]
+Description=Zellij web server
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+ExecStart=%h/.local/bin/zellij web
+Restart=on-failure
+RestartSec=5
+
+[Install]
+WantedBy=default.target
