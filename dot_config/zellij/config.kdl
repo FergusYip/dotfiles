@@ -2,7 +2,7 @@
 // available until Zellij is explicitly unlocked with Ctrl-g.
 default_shell "zsh"
 default_mode "locked"
-default_layout "compact"
+default_layout "default"
 theme "dracula"
 pane_frames true
 scrollback_editor "nvim"
