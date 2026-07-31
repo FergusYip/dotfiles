@@ -3,7 +3,7 @@
 default_shell "zsh"
 default_mode "locked"
 default_layout "default"
-theme "dracula"
+theme "retro-wave"
 pane_frames true
 scrollback_editor "nvim"
 
