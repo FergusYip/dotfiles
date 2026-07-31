@@ -3,7 +3,7 @@
 default_shell "zsh"
 default_mode "locked"
 default_layout "default"
-theme "retro-wave"
+theme "catppuccin-macchiato"
 pane_frames true
 scrollback_editor "nvim"
 
