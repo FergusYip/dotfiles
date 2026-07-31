@@ -6,9 +6,6 @@ default_layout "default"
 theme "catppuccin-macchiato"
 pane_frames true
 scrollback_editor "nvim"
-web_server true
-web_server_ip "127.0.0.1"
-web_server_port 8082
 
 // Zellij's built-in "Unlock First (non-colliding)" preset is tracked here
 // so Chezmoi can reproduce it without an interactive first-run setup.

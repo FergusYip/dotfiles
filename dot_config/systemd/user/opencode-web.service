@@ -1,11 +1,12 @@
 [Unit]
-Description=Zellij web server
+Description=OpenCode web server
 After=network-online.target
 Wants=network-online.target
 
 [Service]
 Type=simple
-ExecStart=%h/.local/bin/zellij web
+Environment=BROWSER=/bin/true
+ExecStart=%h/.local/bin/opencode web --hostname 127.0.0.1 --port 4096
 Restart=on-failure
 RestartSec=5
 
