@@ -33,15 +33,9 @@ fi
 # EndCoderEnv
 
 custard() {
-  while true; do
-    ssh -t coder.fergus-custard 'tmux new-session -A -s main'
-    sleep 1
-  done
+  ssh -t coder.fergus-custard 'tmux new-session -A -s main'
 }
 
 bao() {
-  while true; do
-    ssh -t coder.fergus-bao 'zellij attach --create main'
-    sleep 1
-  done
+  ssh -t coder.fergus-bao 'zellij attach --create main'
 }
