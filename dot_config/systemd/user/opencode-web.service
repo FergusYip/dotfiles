@@ -6,6 +6,7 @@ Wants=network-online.target
 [Service]
 Type=simple
 Environment=BROWSER=/bin/true
+Environment=CODER=true
 ExecStart=%h/.local/bin/opencode web --hostname 127.0.0.1 --port 4096
 Restart=on-failure
 RestartSec=5
