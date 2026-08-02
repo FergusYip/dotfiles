@@ -110,5 +110,11 @@ export PATH="$PATH:${ASDF_DATA_DIR:-$HOME/.asdf}/shims"
 [ -f ~/.config/private_aliases ] && source ~/.config/private_aliases
 source ~/.config/aliases/main.sh
 
+# opencode
+export PATH=$HOME/.opencode/bin:$PATH
+
+# Amp Code
+[ -f ~/.amp/bin/amp ] && export PATH=~/.amp/bin:$PATH
+
 # Must be sourced after all other ZLE widgets.
 source "$ZDOTDIR/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"

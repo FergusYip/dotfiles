@@ -7,6 +7,9 @@ theme "catppuccin-macchiato"
 pane_frames true
 scrollback_editor "nvim"
 
+// No status-bar tips on new sessions.
+show_startup_tips false
+
 // Zellij's built-in "Unlock First (non-colliding)" preset is tracked here
 // so Chezmoi can reproduce it without an interactive first-run setup.
 keybinds clear-defaults=true {

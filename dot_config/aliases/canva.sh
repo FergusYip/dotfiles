@@ -37,5 +37,10 @@ custard() {
 }
 
 bao() {
-  ssh -t coder.fergus-bao 'zellij attach --create main'
+  # --force-run-commands re-runs a resurrected session's commands instead of
+  # leaving dead panes. If the saved dump is unusable (e.g. serialised with no
+  # terminal panes after a workspace auto-stop), zellij exits immediately, so
+  # fall back to --forget for a clean session rather than a "Bye from Zellij!".
+  ssh -t coder.fergus-bao \
+    'zellij attach --create --force-run-commands main || zellij attach --create --forget main'
 }
