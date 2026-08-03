@@ -1,0 +1,19 @@
+[Unit]
+Description=Codex web frontend
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+# Share the app-server daemon with SSH sessions so the browser and the
+# terminal see the same threads. codex_remote_proxy bridges stdio JSON-RPC
+# to the daemon's WebSocket control socket.
+Environment=CODEX_UNIX_SOCKET=%h/.codex/app-server-control/app-server-control.sock
+Environment=CODEX_CLI_PATH=%h/.local/bin/codex_remote_proxy
+ExecStartPre=/usr/local/bin/codex app-server daemon start
+ExecStart=/usr/bin/node %h/.local/share/codex-web/src/server/main.js --host 127.0.0.1 --port 8214
+Restart=on-failure
+RestartSec=5
+
+[Install]
+WantedBy=default.target

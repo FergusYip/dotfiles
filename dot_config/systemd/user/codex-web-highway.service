@@ -1,0 +1,14 @@
+[Unit]
+Description=Infra Highway tunnel for Codex web
+After=network-online.target codex-web.service
+Wants=network-online.target
+Requires=codex-web.service
+
+[Service]
+Type=simple
+ExecStart=/usr/local/bin/infra highway http 8214
+Restart=on-failure
+RestartSec=10
+
+[Install]
+WantedBy=default.target
