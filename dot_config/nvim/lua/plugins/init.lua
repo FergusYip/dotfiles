@@ -35,7 +35,10 @@ return {
     "ibhagwan/fzf-lua",
     cmd = "FzfLua",
     dependencies = { "nvim-tree/nvim-web-devicons" },
-    opts = { "default-title" },
+    opts = {
+      "default-title",
+      files = { follow = true },
+    },
   },
 
   -- test new blink
