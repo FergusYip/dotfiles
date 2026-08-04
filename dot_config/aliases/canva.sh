@@ -38,9 +38,29 @@ custard() {
 
 bao() {
   # --force-run-commands re-runs a resurrected session's commands instead of
-  # leaving dead panes. If the saved dump is unusable (e.g. serialised with no
-  # terminal panes after a workspace auto-stop), zellij exits immediately, so
-  # fall back to --forget for a clean session rather than a "Bye from Zellij!".
-  ssh -t coder.fergus-bao \
-    'zellij attach --create --force-run-commands main || zellij attach --create --forget main'
+  # leaving dead panes. But a workspace auto-stop can serialise tabs holding
+  # only tab-bar/status-bar plugin panes and no terminal at all; resurrecting
+  # that exits instantly with "Bye from Zellij!" *and status 0*, so `||` alone
+  # never catches it -- and `--forget` does not clear it either, it just
+  # resurrects the same broken dump. So: when we know the session was EXITED,
+  # treat an instant exit as a failed resurrection, delete the dump outright,
+  # and start clean.
+  ssh -t coder.fergus-bao '
+    exited=0
+    zellij list-sessions --no-formatting 2>/dev/null \
+      | grep -q "^main .*EXITED" && exited=1
+
+    start=$SECONDS
+    zellij attach --create --force-run-commands main
+    rc=$?
+
+    # Do not name this "status" -- the remote login shell is zsh, where $status
+    # is a read-only alias for $? and assigning to it aborts the script.
+    if [ "$rc" -ne 0 ] ||
+       { [ "$exited" -eq 1 ] && [ "$(( SECONDS - start ))" -lt 3 ]; }; then
+      echo "zellij: could not resurrect main, starting a clean session" >&2
+      zellij delete-session --force main 2>/dev/null
+      zellij attach --create main
+    fi
+  '
 }
